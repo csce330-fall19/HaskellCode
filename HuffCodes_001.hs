@@ -1,13 +1,18 @@
 import Data.List
 
 data HTree = 
+      CNode Double Char
+    | INode Double HTree HTree deriving Show 
 
-{-
+
 freq :: HTree -> Double
+freq (CNode f _) = f
+freq (INode f _ _) = f
 
 
 merge :: HTree -> HTree -> HTree
-
+merge l r = INode (freq l + freq r) l r
+{-
 
 --mergeAllTrees' :: [HTree]  -> HTree 
 --mergeAllTrees' [t] = t
@@ -18,15 +23,25 @@ merge :: HTree -> HTree -> HTree
 
         
 mergeAllTrees :: [HTree] -> HTree
+--}
 
 
-mini :: ...
+mini :: Ord a => (a->a->Bool) -> [a] -> Int
+mini _ [_] = 0
+mini compf (x:xs) 
+    | compf x (xs !! taili) = 0
+    | otherwise = 1 + taili
+        where
+            taili = mini compf xs
+
+
 
 
 --list comprehension
 removei :: Int -> [a] -> [a]
+removei n xs = [ x | (x,i)<- zip xs [0..] , n /=i ]
 
-
+{--
 --recursion
 removei' :: Int -> [a] -> [a]
 
